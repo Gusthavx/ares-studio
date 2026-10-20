@@ -14,6 +14,7 @@
   <img alt="Python 3.10+" src="https://img.shields.io/badge/Python-3.10%2B-1e1e1e?style=flat-square&logo=python&logoColor=white">
   <img alt="WebAssembly" src="https://img.shields.io/badge/motor-WebAssembly-1e1e1e?style=flat-square&logo=webassembly&logoColor=white">
   <img alt="PSD" src="https://img.shields.io/badge/abre%20e%20salva-PSD-1e1e1e?style=flat-square">
+  <img alt="Licença MIT" src="https://img.shields.io/badge/licen%C3%A7a-MIT-1e1e1e?style=flat-square">
 </p>
 
 <p align="center">
@@ -74,6 +75,10 @@ fazer_icone.py    desenha a logo (web/icone.ico e web/icone.png)
 - [**ag-psd**](https://github.com/Agamnentzar/ag-psd) — leitura e gravação de PSD, licença MIT (`web/vendor/ag-psd-LICENSE.txt`).
 
 Photoshop é marca da Adobe. Este projeto não tem ligação com a Adobe.
+
+## 📜 Licença
+
+Código do Ares Studio sob [MIT](LICENSE) © 2026 Gusthavo Silva. O motor em `motor/`, o `web/js/craft.js` e o ag-psd mantêm as licenças originais listadas em Créditos.
 
 ---
 
