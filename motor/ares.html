@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <title>Ares Studio</title>
+  <link rel="icon" href="/icone.png">
+  <!-- Ares Studio: a janela e o nome são daqui; o motor de edição é o PhotoCraft (MIT/Apache-2.0, ver LICENSE-MIT nesta pasta). -->
+  <link rel="modulepreload" href="./photocraft-web-effbf20fc7ec283d.js">
+  <link rel="preload" href="./photocraft-web-effbf20fc7ec283d_bg.wasm" as="fetch" type="application/wasm" crossorigin="anonymous">
+  <script>
+    // O motor na versão web não lê o idioma do Windows e abriria em inglês: enquanto a preferência
+    // estiver em "automático", o Ares Studio grava português. Se você escolher outro idioma, ele respeita.
+    try {
+      const k = 'photocraft.preferences', p = JSON.parse(localStorage.getItem(k) || '{}');
+      p.interface = p.interface || {};
+      if (!p.interface.language || p.interface.language === 'auto') { p.interface.language = 'pt-br'; localStorage.setItem(k, JSON.stringify(p)); }
+    } catch (e) { /* sem armazenamento: abre em inglês */ }
+  </script>
+  <script type="module">
+    import init, * as bindings from './photocraft-web-effbf20fc7ec283d.js';
+    const t0 = performance.now();
+    const wasm = await init({ module_or_path: './photocraft-web-effbf20fc7ec283d_bg.wasm' });
+    window.wasmBindings = bindings;
+    dispatchEvent(new CustomEvent('TrunkApplicationStarted', { detail: { wasm } }));
+    window.aresPronto = Math.round(performance.now() - t0);
+  </script>
+  <style>
+    html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #262626; }
+    #photocraft_canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    #photocraft_loading { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 0 16px; text-align: center; color: #b8b8b8; font: 14px "Segoe UI", system-ui, sans-serif; pointer-events: none; }
+    #photocraft_loading h1 { margin: 0 0 10px; font-size: 26px; font-weight: 600; color: #e8e8e8; letter-spacing: .02em; }
+    #photocraft_loading p { margin: 0 0 8px; max-width: 420px; line-height: 1.5; }
+    #photocraft_loading a { color: #e0e0e0; pointer-events: auto; }
+    #photocraft_stalled { color: #8c8c8c; visibility: hidden; animation: demorou 0s 20s forwards; }
+    @keyframes demorou { to { visibility: visible; } }
+    /* marca do Ares Studio por cima do logotipo do motor, no canto da barra; o clique passa direto para o menu */
+    #ares_marca { position: absolute; left: 6px; top: 3px; width: 22px; height: 22px; padding: 2px; background: #323232; border-radius: 6px; pointer-events: none; z-index: 2; }
+  </style>
+</head>
+<body>
+  <canvas id="photocraft_canvas"></canvas>
+  <img id="ares_marca" src="/icone.png" alt="">
+  <div id="photocraft_loading">
+    <h1>Ares Studio</h1>
+    <p>Abrindo&hellip;</p>
+    <p id="photocraft_stalled">Está demorando mais que o normal. <a href="">Recarregar</a> para tentar de novo.</p>
+  </div>
+  <script>
+    // "Abrir com" e arquivo passado na linha de comando: o app entrega o caminho em ?open=; a página lê o
+    // arquivo pelo servidor local e solta na tela, como se tivesse sido arrastado para a janela.
+    (async function () {
+      const q = new URLSearchParams(location.search), caminho = q.get('open'), chave = q.get('t');
+      if (!caminho) return;
+      const espera = ms => new Promise(r => setTimeout(r, ms));
+      for (let i = 0; i < 300 && document.getElementById('photocraft_loading'); i++) await espera(100);
+      await espera(400);
+      try {
+        const r = await fetch(`/api/read?t=${encodeURIComponent(chave)}&path=${encodeURIComponent(caminho)}`);
+        if (!r.ok) throw new Error(await r.text());
+        const arq = new File([await r.blob()], caminho.split(/[\\/]/).pop()), dt = new DataTransfer();
+        dt.items.add(arq);
+        const alvo = document.getElementById('photocraft_canvas'), b = alvo.getBoundingClientRect();
+        for (const tipo of ['dragenter', 'dragover', 'drop'])
+          alvo.dispatchEvent(new DragEvent(tipo, { bubbles: true, cancelable: true, dataTransfer: dt, clientX: b.width / 2, clientY: b.height / 2 }));
+        window.aresAbriu = arq.name;
+      } catch (e) { console.error('Ares Studio: não abriu o arquivo', e); window.aresAbriu = 'erro: ' + e.message; }
+    })();
+  </script>
+</body>
+</html>

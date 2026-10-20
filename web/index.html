@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Ares Studio</title>
+<link rel="icon" href="icone.png">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<nav id="menubar"></nav>
+<div id="optbar"></div>
+<div id="main">
+  <aside id="toolbar"></aside>
+  <div id="center">
+    <div id="tabs"></div>
+    <div id="stage">
+      <canvas id="view"></canvas>
+      <div id="empty">
+        <h1>Ares Studio</h1>
+        <p>Abra um arquivo (<kbd>Ctrl</kbd>+<kbd>O</kbd>), crie um novo (<kbd>Ctrl</kbd>+<kbd>N</kbd>) ou solte uma imagem aqui.</p>
+        <p class="dim">PSD · PSB · PNG · JPG · WebP · GIF · BMP</p>
+      </div>
+    </div>
+    <footer id="status"></footer>
+  </div>
+  <aside id="panels">
+    <section class="panel" id="p-color"><header>Cor</header><div class="body" id="swatches"></div></section>
+    <section class="panel" id="p-history"><header>Histórico</header><div class="body" id="history"></div></section>
+    <section class="panel grow" id="p-layers">
+      <header>Camadas</header>
+      <div id="layerctl"></div>
+      <div class="body" id="layers"></div>
+      <div id="layerbtn"></div>
+    </section>
+  </aside>
+</div>
+<div id="toasts"></div>
+<input type="file" id="filein" hidden multiple accept=".psd,.psb,.png,.jpg,.jpeg,.webp,.gif,.bmp">
+<input type="file" id="placein" hidden multiple accept=".png,.jpg,.jpeg,.webp,.gif,.bmp">
+<input type="color" id="colorin" hidden>
+<script src="vendor/ag-psd.js"></script>
+<script src="js/core.js"></script>
+<script src="js/ops.js"></script>
+<script src="js/filters.js"></script>
+<script src="js/psd.js"></script>
+<script src="js/tools.js"></script>
+<script src="js/extra.js"></script>
+<script src="js/craft.js"></script>
+<script src="js/daily.js"></script>
+<script src="js/ui.js"></script>
+</body>
+</html>
