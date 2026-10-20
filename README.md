@@ -78,7 +78,7 @@ Photoshop é marca da Adobe. Este projeto não tem ligação com a Adobe.
 
 ## 📜 Licença
 
-Código do Ares Studio sob [MIT](LICENSE) © 2026 Gusthavo Silva. O motor em `motor/`, o `web/js/craft.js` e o ag-psd mantêm as licenças originais listadas em Créditos.
+Código do Ares Studio sob [MIT](LICENSE) © 2026 Gusthavo Silva. O motor em `motor/`, o `web/js/craft.js` e o ag-psd mantêm as licenças originais (lista em [THIRD-PARTY-NOTICES.txt](THIRD-PARTY-NOTICES.txt)).
 
 ---
 

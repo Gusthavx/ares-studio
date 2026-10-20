@@ -19,12 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----------------------------------------------------------------------------
-Third-party components keep their own licenses:
-
-- motor/  : PhotoCraft (ArtCraft Team and the PhotoCraft contributors),
-            MIT OR Apache-2.0 - see motor/LICENSE-MIT and motor/LICENSE-APACHE
-- web/js/craft.js : adapted from PhotoCraft, MIT OR Apache-2.0 -
-            see web/vendor/photocraft-NOTICE.txt
-- web/vendor/ag-psd.js : ag-psd, MIT - see web/vendor/ag-psd-LICENSE.txt
