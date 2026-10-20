@@ -170,7 +170,7 @@ def _pintar_barra(hwnd):
 
 def _separar_na_barra(hwnd):
     """Dá identidade própria à janela na barra de tarefas: sem isso o Windows junta com
-    qualquer outro programa que rode pelo pythonw (ex.: Financ.co, Restock Analytics)."""
+    qualquer outro programa que rode pelo pythonw."""
     import pywintypes
     from win32com.propsys import propsys
     fmt = "{9F4C2855-9F79-4B39-A8D0-E1D42DE1D5F3}"
